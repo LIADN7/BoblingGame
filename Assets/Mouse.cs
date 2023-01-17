@@ -7,33 +7,36 @@ using UnityEngine.SceneManagement;
 public class Mouse : MonoBehaviour
 {
     [SerializeField] protected int NumberOfThrow;
-    [SerializeField] protected GameObject prefabToSpawn;
-    [SerializeField] protected GameObject Pin1;
-    [SerializeField] protected GameObject Pin2;
+    [SerializeField] GameObject prefabToSpawn;
+    [SerializeField] protected GameObject[] Pins;
+
     protected Vector3 velocityOfSpawnedObject;
     [SerializeField] protected string NextSceneName;
-    [SerializeField] TextMeshPro text;
-    private float EPS = 0.2f;
+    [SerializeField] protected TextMeshPro text;
+    private static float EPS = 0.2f;
+    [SerializeField] protected GameObject nextLevel;
 
     // Start is called before the first frame update
     void Start()
     {
-        //pos = Input.mousePosition;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        nextLevel.SetActive(false);
+        
     }
 
     void FixedUpdate()
     {
-        float z1 = Pin1.transform.rotation.z;
-        float z2 = Pin2.transform.rotation.z;
-        //Debug.Log(z1);
-        if ((z1>EPS||z1<-EPS)&& (z2 > EPS || z2 < -EPS))
+        float[] z = new float[Pins.Length];
+        for (int i = 0; i < z.Length; i++)
         {
-            SceneManager.LoadScene(NextSceneName); ;
+            z[i] = Pins[i].transform.rotation.z;
+        }
+        
+
+        //Debug.Log(z1);
+        if (winFunc(z))
+        {
+            nextLevel.SetActive(true);
+            //SceneManager.LoadScene(NextSceneName); ;
         }
             //0 is for when the left button is clicked, 1 is for the right
             
@@ -56,6 +59,22 @@ public class Mouse : MonoBehaviour
 
         }
             
+    }
+
+
+
+    private static bool winFunc(float[] z)
+    {
+        for (int i = 0; i < z.Length; i++)
+        {
+            if (!(z[i] > EPS || z[i] < -EPS))
+            {
+                return false;
+            }
+        }
+
+
+        return true;
     }
     
 }

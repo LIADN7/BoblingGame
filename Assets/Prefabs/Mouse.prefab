@@ -43,9 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731230729ad26db4f89cb38077b1bcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfThrow: 2
+  NumberOfThrow: 0
   prefabToSpawn: {fileID: 6012368154040616110, guid: ec01f54c4616177469be31b5e60d0806, type: 3}
-  Pin1: {fileID: 0}
-  Pin2: {fileID: 0}
-  NextSceneName: level2
+  Pins: []
+  NextSceneName: 
   text: {fileID: 0}
+  nextLevel: {fileID: 0}
